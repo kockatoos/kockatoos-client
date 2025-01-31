@@ -1,1 +1,1 @@
-# kockatoos-client
+# kockatoos-model
