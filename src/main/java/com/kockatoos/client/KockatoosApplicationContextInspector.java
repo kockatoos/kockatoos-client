@@ -1,39 +1,56 @@
 package com.kockatoos.client;
 
+import com.kockatoos.client.annotations.InBoundQueue;
+import com.kockatoos.client.annotations.InOutBoundQueue;
+import com.kockatoos.client.annotations.OutBoundQueue;
+import jakarta.jms.Queue;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
-
-import java.beans.beancontext.BeanContext;
-import java.lang.reflect.Method;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class KockatoosApplicationContextInspector implements ApplicationListener<ContextRefreshedEvent> {
 
+    private final List<String> inboundQueues = new ArrayList<>();
+    private final List<String> outboundQueues = new ArrayList<>();
+    private final List<String> inOutboundQueues = new ArrayList<>();
+    private final List<String> httpInboundEndPoint = new ArrayList<>();
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
-        // Get the application context
         var applicationContext = event.getApplicationContext();
 
-        String[] beanNames = applicationContext.getBeanDefinitionNames();
+        // Get all beans of type Queue
+        Map<String, Queue> queueBeans = applicationContext.getBeansOfType(Queue.class);
 
-        // Iterate through all beans
-        for (String beanName : beanNames) {
+        for (Map.Entry<String, Queue> entry : queueBeans.entrySet()) {
+            String beanName = entry.getKey();
+            Queue queue = entry.getValue();
 
-            Object bean = applicationContext.getBean(beanName);
-
-            // Check for classes implementing custom interfaces like JmsSender
-            if (bean instanceof Object) {
-                System.out.println("Found a JmsSender bean: " + beanName);
-                // You can call methods on the bean to get queue names
+            // Check for annotations
+            if (applicationContext.findAnnotationOnBean(beanName, InBoundQueue.class) != null) {
+                inboundQueues.add(beanName);
             }
-
+            if (applicationContext.findAnnotationOnBean(beanName, OutBoundQueue.class) != null) {
+                outboundQueues.add(beanName);
+            }
+            if (applicationContext.findAnnotationOnBean(beanName, InOutBoundQueue.class) != null) {
+                inOutboundQueues.add(beanName);
+            }
         }
+
+        printQueueDetails();
     }
 
-}
+    private void printQueueDetails() {
+        System.out.println("Inbound Queues: " + inboundQueues);
+        System.out.println("Outbound Queues: " + outboundQueues);
+        System.out.println("In-Out Queues: " + inOutboundQueues);
+    }
 
+
+}
