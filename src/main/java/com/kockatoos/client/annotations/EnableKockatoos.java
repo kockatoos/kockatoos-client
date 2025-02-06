@@ -1,6 +1,6 @@
 package com.kockatoos.client.annotations;
 
-import com.kockatoos.client.KockatoosRegistrar;
+import com.kockatoos.client.core.KockatoosRegistrar;
 import org.springframework.context.annotation.Import;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
