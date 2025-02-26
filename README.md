@@ -49,7 +49,26 @@ public class MyApplication {
 }
 
 ```
-### Step 3: Custom Implementation (Optional)
+
+## Default Properties for Spring Boot
+
+```properties
+kockatoos.rest.endpoint.expose=false
+kockatoos.cloud.server.expose=false
+kockatoos.cloud.server.url=https://xyz.com
+kockatoos.application.name=spring.application.name 
+kockatoos.application.server.port=server.port
+kockatoos.application.context-path=server.servlet.context-path
+```
+
+## Add Properties for Spring Boot
+
+```properties
+kockatoos.cloud.server.secret -> create cloud account to get secret.
+
+```
+
+## Custom Implementation (Optional)
 ```java
 @Component
 public class CustomPropertyProvider extends KockatoosAbstractPropertyProvider {
@@ -89,4 +108,8 @@ public class CustomPropertyProvider extends KockatoosAbstractPropertyProvider {
 }
 
 ```
+
+
+
+
 

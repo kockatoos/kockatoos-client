@@ -36,6 +36,11 @@ public class KockatoosApplicationContextInspector implements ApplicationListener
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
+        //Load YAML file
+        KockatoosWrapper wrapper = YamlConfigLoader.loadConfig("kockatoos.yaml", KockatoosWrapper.class);
+        KockatoosConfig config = wrapper.getKockatoos();
+        System.out.print("$$$"+config);
+
         ApplicationContext applicationContext = event.getApplicationContext();
 
         GenericApplicationContext context = (GenericApplicationContext) applicationContext;

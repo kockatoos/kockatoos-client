@@ -76,6 +76,20 @@
 			<artifactId>lombok</artifactId>
 		</dependency>
 
+		<!-- Jackson Databind (core dependency for ObjectMapper) -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.16.0</version>
+		</dependency>
+
+		<!-- Jackson YAML module to parse YAML files -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-yaml</artifactId>
+			<version>2.16.0</version>
+		</dependency>
+
 
 	</dependencies>
 

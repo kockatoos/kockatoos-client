@@ -1,6 +1,7 @@
 package com.kockatoos.client.core;
 
 import com.kockatoos.client.controller.KockatoosEndpoint;
+import com.kockatoos.client.model.KockatoosConfig;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -17,6 +18,7 @@ public class KockatoosRegistrar implements ImportBeanDefinitionRegistrar {
 
         registry.registerBeanDefinition("kockatoosApplicationContextInspector", BeanDefinitionBuilder.genericBeanDefinition(KockatoosApplicationContextInspector.class).getBeanDefinition());
         //registry.registerBeanDefinition("kockatoosEndpoint",BeanDefinitionBuilder.genericBeanDefinition(KockatoosEndpoint.class).getBeanDefinition());
+
 
     }
 
