@@ -1,6 +1,6 @@
 package com.kockatoos.client.annotations;
 
-import com.kockatoos.client.core.KockatoosRegistrar;
+import com.kockatoos.client.core.KockatoosDynamicBeanRegistrar;
 import org.springframework.context.annotation.Import;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import(KockatoosRegistrar.class)
+@Import(KockatoosDynamicBeanRegistrar.class)
 public @interface EnableKockatoos {
 }
 

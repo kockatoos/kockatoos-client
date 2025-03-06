@@ -1,13 +1,15 @@
-package com.kockatoos.client.core;
+package com.kockatoos.client.core.bkp;
 
 import com.kockatoos.client.annotations.InBoundQueue;
 import com.kockatoos.client.annotations.OutBoundQueue;
+import com.kockatoos.client.core.KockatoosAbstractPropertyProvider;
+import com.kockatoos.client.core.KockatoosPropertyProvider;
+import com.kockatoos.client.core.YamlConfigLoader;
 import com.kockatoos.client.model.*;
-import com.kockatoos.client.util.DynamicBeanRegistrationUtil;
 import com.kockatoos.client.util.DataUtil;
+import com.kockatoos.client.util.DynamicBeanRegistrationUtil;
 import jakarta.jms.JMSException;
 import jakarta.jms.Queue;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
@@ -16,20 +18,20 @@ import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-public class KockatoosApplicationContextInspector implements ApplicationListener<ContextRefreshedEvent> {
+
+public class KockatoosListener implements ApplicationListener<ContextRefreshedEvent> {
 
     Output output = new Output();
     private final List<JmsEndpoint> inboundQueues = new ArrayList<>();
     private final List<JmsEndpoint> outboundQueues = new ArrayList<>();
     private final List<RestInBoundEndpoint> httpInboundEndPoint = new ArrayList<>();
 
-    public KockatoosApplicationContextInspector(){
+    public KockatoosListener(){
         System.out.println("called....");
     }
 
